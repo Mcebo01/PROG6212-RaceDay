@@ -69,6 +69,6 @@ jobs:
 
       - name: CI validation successful
         run: |
-          echo "===================================="
+          echo "====================================="
           echo "RaceDay CI validation successful!"
-          echo "===================================="
+          echo "====================================="
