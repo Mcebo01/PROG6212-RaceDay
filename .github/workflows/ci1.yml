@@ -20,7 +20,7 @@ jobs:
         run: |
           echo "Checking RaceDay Part 1 repository structure..."
 
-          test -d Part 1 - SectionA-B
+          test -d "Part 1 - SectionA-B"
           test -f RaceDay_Database.sql
           test -f README.md
 
@@ -33,7 +33,7 @@ jobs:
 
       - name: Validate API endpoint plan
         run: |
-          test -s Part 1 - SectionA-B
+          test -s "Part 1 - SectionA-B"
           echo "API endpoint plan exists and is not empty."
 
       - name: Validation successful
