@@ -1,0 +1,40 @@
+name: RaceDay Part 1 CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validate-part1:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check repository structure
+        run: |
+          echo "Checking RaceDay Part 1 repository structure..."
+
+          test -d Part 1 - SectionA-B
+          test -f RaceDay_Database.sql
+          test -f README.md
+
+          echo "All required Part 1 files are present."
+
+      - name: Validate SQL file
+        run: |
+          test -s RaceDay_Database.sql
+          echo "SQL database script exists and is not empty."
+
+      - name: Validate API endpoint plan
+        run: |
+          test -s Part 1 - SectionA-B
+          echo "API endpoint plan exists and is not empty."
+
+      - name: Validation successful
+        run: echo "RaceDay Part 1 CI validation completed successfully."
