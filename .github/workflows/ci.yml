@@ -1,0 +1,74 @@
+name: RaceDay CI
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+jobs:
+  validate:
+    name: Validate RaceDay Repository
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check repository structure
+        run: |
+          echo "Checking RaceDay repository structure..."
+
+          test -d .github
+          test -d .github/workflows
+          test -f README.md
+          test -f RaceDay_Database.sql
+          test -f Section_A-B.pdf
+
+          echo "Repository structure is correct."
+
+      - name: Check required files are not empty
+        run: |
+          echo "Checking required files..."
+
+          test -s README.md
+          test -s RaceDay_Database.sql
+          test -s Section_A-B.pdf
+          test -s .github/workflows/ci.yml
+
+          echo "All required files contain data."
+
+      - name: Validate README
+        run: |
+          echo "Checking README..."
+
+          grep -qi "RaceDay" README.md
+          grep -qi "Organiser" README.md
+          grep -qi "Participant" README.md
+
+          echo "README validation passed."
+
+      - name: Validate SQL script
+        run: |
+          echo "Checking SQL database script..."
+
+          grep -qi "CREATE TABLE" RaceDay_Database.sql
+          grep -qi "CREATE DATABASE" RaceDay_Database.sql
+
+          echo "SQL script validation passed."
+
+      - name: Display repository contents
+        run: |
+          echo "Repository contents:"
+          find . -maxdepth 3 -type f | sort
+
+      - name: CI validation successful
+        run: |
+          echo "===================================="
+          echo "RaceDay CI validation successful!"
+          echo "===================================="
